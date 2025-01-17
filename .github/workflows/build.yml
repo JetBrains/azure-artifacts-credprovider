@@ -1,0 +1,34 @@
+name: Build and Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📝 Fetch Sources
+        uses: actions/checkout@v3
+      - name: 🛠 Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: 🏗 Restore dependencies
+        run: dotnet restore
+      - name: 🏗 Build for tests
+        run: dotnet build --no-restore --configuration Debug
+      - name: 📝 Test ChromeProtocol.Runtime
+        run: dotnet test --no-build --configuration Debug --verbosity normal src/Authentication.Tests
+      - name: 📝 Test ChromeProtocol.Tools
+        run: dotnet test --no-build --configuration Debug --verbosity normal CredentialProvider.Microsoft.Tests
+      - name: 🏗 Build for release
+        run: dotnet build --no-restore --configuration Release
+      - name: 📦 Publish
+        run: dotnet publish --no-build --configuration Release CredentialProvider.Microsoft
+      - name: 📦 Pack
+        run: dotnet pack --no-build --configuration Release --output ./nupkg CredentialProvider.Microsoft
+      - name: 📦 Upload Artifact
+        uses: kittaakos/upload-artifact-as-is@v0
+        with:
+          path: ./nupkg/
