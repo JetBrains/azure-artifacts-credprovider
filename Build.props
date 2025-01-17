@@ -2,6 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <CredentialProviderVersion>1.3.0</CredentialProviderVersion>
+    <CredentialProviderBuildNumber Condition="$(CredentialProviderBuildNumber) == ''">0</CredentialProviderBuildNumber>
     <VersionSuffix></VersionSuffix>
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
