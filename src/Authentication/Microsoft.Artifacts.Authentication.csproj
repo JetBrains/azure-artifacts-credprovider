@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>JetBrains.Microsoft.Artifacts.Authentication</PackageId>
     <AssemblyName>Microsoft.Artifacts.Authentication</AssemblyName>
     <RootNamespace>Microsoft.Artifacts.Authentication</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,6 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <VersionPrefix>0.2.3</VersionPrefix>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft</Owners>
     <Description>Azure Artifacts authentication library for credential providers.</Description>
