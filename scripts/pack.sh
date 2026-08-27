@@ -6,18 +6,24 @@ current_dir=$(dirname -- "$0")
 current_dir=$(cd -- "$current_dir" && pwd)
 
 CONFIGURATION="Release"
-PROJECT="CredentialProvider.Microsoft"
+PROJECTS=(
+  "CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj"
+  "src/Authentication/Microsoft.Artifacts.Authentication.csproj"
+)
 NUPKG_OUTPUT="./nupkg"
 BUILD_NUMBER=${BUILD_NUMBER:-0}
 
 mkdir -p "$NUPKG_OUTPUT"
 
-echo "> Packing..."
-"$current_dir/dotnet-sdk.cmd" pack \
-  --no-build \
-  --configuration $CONFIGURATION \
-  --output "$NUPKG_OUTPUT" \
-  "$PROJECT" \
-  /p:CredentialProviderBuildNumber="$BUILD_NUMBER"
+for project in "${PROJECTS[@]}"; do
+  echo "> Packing ${project}..."
+
+  "$current_dir/dotnet-sdk.cmd" pack \
+    --no-build \
+    --configuration "$CONFIGURATION" \
+    --output "$NUPKG_OUTPUT" \
+    "$project" \
+    "-p:CredentialProviderBuildNumber=${BUILD_NUMBER}"
+done
 
 echo "> Packing completed successfully!"

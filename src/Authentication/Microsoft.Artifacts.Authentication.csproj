@@ -8,7 +8,8 @@
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <VersionPrefix>0.2.3</VersionPrefix>
+    <CredentialProviderBuildNumber Condition="'$(CredentialProviderBuildNumber)' == ''">0</CredentialProviderBuildNumber>
+    <VersionPrefix>0.2.3.$(CredentialProviderBuildNumber)</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Authors>Microsoft</Authors>
