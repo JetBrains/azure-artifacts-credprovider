@@ -22,7 +22,7 @@ jobs:
         run: dotnet test --no-build --configuration Debug --verbosity normal src/Authentication.Tests
       - name: 📝 Test CredentialProvider.Microsoft
         run: dotnet test --no-build --configuration Debug --verbosity normal CredentialProvider.Microsoft.Tests
-
+  
   publish:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -34,6 +34,8 @@ jobs:
       - name: 📦 Pack
         run: ./scripts/pack.sh
       - name: 📦 Upload Artifact
-        uses: kittaakos/upload-artifact-as-is@v0
+        uses: actions/upload-artifact@v4
         with:
-          path: ./nupkg/
+          name: nuget-packages
+          path: ./nupkg/*.nupkg
+          if-no-files-found: error
