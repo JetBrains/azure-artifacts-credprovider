@@ -5,6 +5,8 @@ set -e
 current_dir=$(dirname -- "$0")
 current_dir=$(cd -- "$current_dir" && pwd)
 
+export SignType="true"
+
 CONFIGURATION="Release"
 PROJECT="CredentialProvider.Microsoft"
 
